@@ -1,1 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>ChatGPT Test</title></head>
+<body>
+  <input id="msg" placeholder="Type a message..." />
+  <button onclick="send()">Send</button>
+  <pre id="result"></pre>
+
+  <script>
+    async function send() {
+      const message = document.getElementById('msg').value;
+      const res = await fetch("https://soulmachineagent.onrender.com/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ "message" : "hi there" })
+      });
+      const data = await res.json();
+      document.getElementById('result').textContent = data.reply || data.error;
+    }
+  </script>
+</body>
+</html>
 
