@@ -27,7 +27,7 @@ async def chat_with_gpt(request: Request):
 
     try:
         completion = openai.ChatCompletion.create(
-            model="gpt-4o",  # Use gpt-3.5-turbo if needed
+            model="gpt-3.5-turbo",  # Use gpt-3.5-turbo or gpt-4o if needed
             messages=[
                 {"role": "system", "content": "You are a helpful digital assistant with a friendly voice."},
                 {"role": "user", "content": user_input}
