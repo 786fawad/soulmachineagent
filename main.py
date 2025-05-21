@@ -20,7 +20,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @app.post("/chat")
 async def chat_with_gpt(request: Request):
     data = await request.json()
-    user_input = data.get("message", "")
+    user_input = data.get("message", "Hi There")
 
     if not user_input:
         return {"error": "No message received."}
