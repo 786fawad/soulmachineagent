@@ -1,9 +1,13 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import openai
 import os
 
 app = FastAPI()
+
+# Serve HTML file from /static
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 # CORS setup for testing with any frontend or Soul Machines client
 app.add_middleware(
