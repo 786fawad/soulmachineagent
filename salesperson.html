@@ -12,7 +12,7 @@
       const res = await fetch("https://soulmachineagent.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({ message: hi there })
       });
       const data = await res.json();
       document.getElementById('result').textContent = data.reply || data.error;
