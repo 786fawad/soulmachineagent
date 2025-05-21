@@ -24,21 +24,30 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @app.post("/chat")
 async def chat_with_gpt(request: Request):
     data = await request.json()
-    user_input = data.get("message", "Hi There")
+    user_input = data.get("message", "")
 
     if not user_input:
-        return {"error": "No message received."}
+        return {"message": {"type": "text", "content": "No message received."}}
 
     try:
         completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # Use gpt-3.5-turbo or gpt-4o if needed
+            model="gpt-4o",
             messages=[
-                {"role": "system", "content": "You are a helpful digital assistant with a friendly voice."},
+                {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": user_input}
             ]
         )
         reply = completion.choices[0].message["content"].strip()
-        return {"reply": reply}
-
+        return {
+            "message": {
+                "type": "text",
+                "content": reply
+            }
+        }
     except Exception as e:
-        return {"error": str(e)}
+        return {
+            "message": {
+                "type": "text",
+                "content": f"Error: {str(e)}"
+            }
+        }
